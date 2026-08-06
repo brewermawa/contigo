@@ -40,13 +40,27 @@ class Patient(models.Model):
     email = models.EmailField(verbose_name="Correo electrónico")
     birth_date = models.DateField(verbose_name="Fecha de nacimiento")
     picture = models.ImageField(upload_to='pacientes/', verbose_name="Foto")
-    comment = models.TextField(blank=True, verbose_name="Comentarios")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
     def formatted_phone(self):
         return f"({self.phone[:2]}){self.phone[2:6]}-{self.phone[6:]}"
+    
+
+class PatientComment(models.Model):
+    class Meta:
+        verbose_name = "Comentario"
+        verbose_name_plural = "Comentarios"
+        ordering = ['-created_at']
+
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name="comments", verbose_name="Paciente")
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="patient_comments", verbose_name="Usuario")
+    comment = models.TextField(verbose_name="Comentario")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Fecha")
+
+    def __str__(self):
+        return f"{self.patient} — {self.created_at:%d/%m/%Y}"
 
 
 class Address(models.Model):

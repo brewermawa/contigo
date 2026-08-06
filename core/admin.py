@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from .models import (
     Companion, CompanionSchedule, Patient, Address, Disease,
-    Medication, Family, Visit, PhysicalActivity, VisitReport
+    Medication, Family, Visit, PhysicalActivity, VisitReport, PatientComment,
 )
 
 
@@ -53,10 +53,24 @@ class FamilyInline(admin.TabularInline):
     extra = 1
 
 
+
+class PatientCommentInline(admin.TabularInline):
+    model = PatientComment
+    extra = 1
+    readonly_fields = ['created_at']
+
+
 class PatientAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'phone', 'email']
     search_fields = ['first_name', 'last_name', 'email']
-    inlines = [AddressInline, DiseaseInline, MedicationInline, FamilyInline]
+    inlines = [AddressInline, DiseaseInline, MedicationInline, FamilyInline, PatientCommentInline]
+
+
+
+class PatientAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'phone', 'email']
+    search_fields = ['first_name', 'last_name', 'email']
+    inlines = [AddressInline, DiseaseInline, MedicationInline, FamilyInline, PatientCommentInline]
 
 
 admin.site.register(Patient, PatientAdmin)

@@ -1,0 +1,190 @@
+:root {
+  --contigo-green:       #0E6B5B;
+  --contigo-green-light: #E1F5EE;
+  --contigo-green-mid:   #4CA59A;
+  --contigo-sand:        #E6D9B8;
+  --contigo-red:         #E74C3C;
+  --nav-height:          60px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #F4F6F5;
+  color: #1a1a1a;
+  padding-top: var(--nav-height);
+}
+
+/* ── Navbar ── */
+.navbar {
+  height: var(--nav-height);
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--contigo-green) !important;
+  letter-spacing: -0.3px;
+}
+
+.navbar-brand .brand-heart {
+  width: 30px;
+  height: 30px;
+  background: var(--contigo-green);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-brand .brand-heart i {
+  transform: rotate(45deg);
+  color: #fff;
+  font-size: 14px;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: #555 !important;
+  padding: 0.4rem 1rem !important;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--contigo-green-light);
+  color: var(--contigo-green) !important;
+}
+
+.nav-link i {
+  font-size: 16px;
+  margin-right: 4px;
+  vertical-align: -2px;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #555;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--contigo-green);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ── Page content ── */
+.page-content {
+  padding: 1.75rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.page-header .breadcrumb {
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+.breadcrumb-item a {
+  color: var(--contigo-green);
+  text-decoration: none;
+}
+
+/* ── Cards ── */
+.card {
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.card-header {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0.875rem 1.25rem;
+}
+
+/* ── Buttons ── */
+.btn-contigo {
+  background: var(--contigo-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 7px 16px;
+  transition: background 0.15s;
+}
+
+.btn-contigo:hover {
+  background: #0a5247;
+  color: #fff;
+}
+
+.btn-outline-contigo {
+  border: 1px solid var(--contigo-green);
+  color: var(--contigo-green);
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 7px 16px;
+  transition: all 0.15s;
+}
+
+.btn-outline-contigo:hover {
+  background: var(--contigo-green-light);
+  color: var(--contigo-green);
+}
+
+/* ── Status badges ── */
+.badge-pending    { background: #FAEEDA; color: #854F0B; }
+.badge-scheduled  { background: #E1F5EE; color: #0F6E56; }
+.badge-completed  { background: #EAF3DE; color: #3B6D11; }
+.badge-cancelled  { background: #FCEBEB; color: #A32D2D; }
+
+/* ── Alerts ── */
+.alert-contigo {
+  background: #FAEEDA;
+  border-left: 3px solid #EF9F27;
+  border-radius: 0 8px 8px 0;
+  color: #854F0B;
+  font-size: 13px;
+  padding: 10px 14px;
+}
+
+/* ── Django messages ── */
+.messages-container {
+  position: fixed;
+  top: calc(var(--nav-height) + 10px);
+  right: 16px;
+  z-index: 1050;
+  width: 320px;
+}

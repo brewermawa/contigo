@@ -1,0 +1,136 @@
+/* ── Metric cards ── */
+.metric-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  height: 100%;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.metric-value.green { color: var(--contigo-green); }
+
+.metric-sub {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.metric-divider {
+  border-left: 1px solid #f0f0f0;
+  margin: 0 1rem;
+}
+
+/* ── Toggle pills ── */
+.toggle-pills .btn {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: transparent;
+  color: #888;
+  line-height: 1.4;
+}
+
+.toggle-pills .btn.active {
+  background: var(--contigo-green);
+  border-color: var(--contigo-green);
+  color: #fff;
+}
+
+/* ── Quick actions ── */
+.quick-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+/* ── Visit rows ── */
+.visit-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.visit-row:last-child { border-bottom: none; }
+
+.visit-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  min-width: 100px;
+}
+
+.visit-info { flex: 1; }
+
+.visit-patient {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.visit-companion {
+  font-size: 12px;
+  color: #888;
+  margin-top: 1px;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ── Upcoming ── */
+.upcoming-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.upcoming-row:last-child { border-bottom: none; }
+
+.upcoming-date {
+  font-size: 12px;
+  color: #888;
+  min-width: 70px;
+}
+
+.upcoming-detail {
+  font-size: 13px;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.upcoming-time {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ── Section title ── */
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}

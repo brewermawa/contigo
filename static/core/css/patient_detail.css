@@ -1,0 +1,196 @@
+.detail-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.detail-card-header {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.75rem 1.25rem;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #888;
+}
+
+.detail-card-body {
+  padding: 1.25rem;
+}
+
+.patient-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.patient-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8e8e8;
+}
+
+.patient-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--contigo-green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--contigo-green);
+  flex-shrink: 0;
+}
+
+.patient-full-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.patient-email {
+  font-size: 13px;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+.detail-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 13px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  color: #aaa;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.disease-item,
+.family-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 13px;
+}
+
+.disease-item:last-child,
+.family-item:last-child {
+  border-bottom: none;
+}
+
+.disease-name,
+.family-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.disease-comment,
+.family-detail {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.medication-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 13px;
+}
+
+.medication-item:last-child {
+  border-bottom: none;
+}
+
+.medication-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.medication-detail {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.badge-active {
+  background: #E1F5EE;
+  color: #0F6E56;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.badge-inactive {
+  background: #f0f0f0;
+  color: #888;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.empty-section {
+  font-size: 13px;
+  color: #aaa;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ── Comments ── */
+.comment-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.comment-item:last-of-type {
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--contigo-green);
+}
+
+.comment-date {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.comment-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+}

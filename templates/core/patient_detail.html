@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ patient.first_name }} {{ patient.last_name }} — Contigo{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'core/css/patient_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between">
+  <div>
+    <h1>Detalle del paciente</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'patient_list' %}">Pacientes</a></li>
+        <li class="breadcrumb-item active">{{ patient.first_name }} {{ patient.last_name }}</li>
+      </ol>
+    </nav>
+  </div>
+  <a href="#" class="btn btn-outline-contigo">
+    <i class="bi bi-pencil me-1"></i>Editar
+  </a>
+</div>
+
+<div class="row g-4">
+  <div class="col-12 col-lg-6">
+
+    <!-- Datos generales -->
+    <div class="detail-card">
+      <div class="detail-card-header">Datos generales</div>
+      <div class="detail-card-body">
+        <div class="patient-header">
+          {% if patient.picture %}
+            <img src="{{ patient.picture.url }}" class="patient-photo" alt="{{ patient.first_name }}">
+          {% else %}
+            <div class="patient-photo-placeholder">
+              {{ patient.first_name|first|upper }}{{ patient.last_name|first|upper }}
+            </div>
+          {% endif %}
+          <div>
+            <p class="patient-full-name">{{ patient.first_name }} {{ patient.last_name }}</p>
+            <p class="patient-email">{{ patient.email }}</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Teléfono</span>
+          <span class="detail-value">{{ patient.formatted_phone }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Fecha de nacimiento</span>
+          <span class="detail-value">{{ patient.birth_date|date:"d/m/Y" }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dirección -->
+    <div class="detail-card">
+      <div class="detail-card-header">Dirección</div>
+      <div class="detail-card-body">
+        {% if patient.address %}
+          <div class="detail-row">
+            <span class="detail-label">Calle</span>
+            <span class="detail-value">
+              {{ patient.address.street }} {{ patient.address.ext_number }}
+              {% if patient.address.int_number %}Int. {{ patient.address.int_number }}{% endif %}
+            </span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Colonia</span>
+            <span class="detail-value">{{ patient.address.neighborhood }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Ciudad</span>
+            <span class="detail-value">{{ patient.address.city }}, {{ patient.address.state }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Código postal</span>
+            <span class="detail-value">{{ patient.address.zip_code }}</span>
+          </div>
+        {% else %}
+          <div class="empty-section">Sin dirección registrada</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Familiares -->
+    <div class="detail-card">
+      <div class="detail-card-header">Familiares</div>
+      <div class="detail-card-body">
+        {% for familiar in patient.family.all %}
+          <div class="family-item">
+            <div class="family-name">
+              {{ familiar.first_name }} {{ familiar.last_name }}
+              <span class="text-muted" style="font-weight:400;">— {{ familiar.get_relationship_display }}</span>
+            </div>
+            <div class="family-detail">
+              <i class="bi bi-telephone me-1"></i>{{ familiar.formatted_phone }}
+              {% if familiar.email %}
+              &nbsp;·&nbsp;<i class="bi bi-envelope me-1"></i>{{ familiar.email }}
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <div class="empty-section">Sin familiares registrados</div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 col-lg-6">
+
+    <!-- Enfermedades -->
+    <div class="detail-card">
+      <div class="detail-card-header">Enfermedades</div>
+      <div class="detail-card-body">
+        {% for disease in patient.diseases.all %}
+          <div class="disease-item">
+            <div class="disease-name">{{ disease.name }}</div>
+            {% if disease.comment %}
+              <div class="disease-comment">{{ disease.comment }}</div>
+            {% endif %}
+          </div>
+        {% empty %}
+          <div class="empty-section">Sin enfermedades registradas</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Medicamentos -->
+    <div class="detail-card">
+      <div class="detail-card-header">Medicamentos</div>
+      <div class="detail-card-body">
+        {% for med in patient.medications.all %}
+          <div class="medication-item">
+            <div>
+              <div class="medication-name">{{ med.name }}</div>
+              <div class="medication-detail">
+                {{ med.dosage }} · {{ med.frequency }}
+                {% if med.comment %}<br>{{ med.comment }}{% endif %}
+              </div>
+            </div>
+            {% if med.active %}
+              <span class="badge-active">Activo</span>
+            {% else %}
+              <span class="badge-inactive">Inactivo</span>
+            {% endif %}
+          </div>
+        {% empty %}
+          <div class="empty-section">Sin medicamentos registrados</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="detail-card">
+      <div class="detail-card-header">Comentarios</div>
+      <div class="detail-card-body">
+        <div id="comments-container">
+          {% include 'core/patient_comments_partial.html' %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.12/dist/htmx.min.js"></script>
+{% endblock %}

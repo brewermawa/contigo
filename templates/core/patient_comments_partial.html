@@ -1,0 +1,24 @@
+{% for comment in patient.comments.all %}
+<div class="comment-item">
+  <div class="comment-header">
+    <span class="comment-author">{{ comment.user.get_full_name|default:comment.user.username }}</span>
+    <span class="comment-date">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+  </div>
+  <div class="comment-text">{{ comment.comment }}</div>
+</div>
+{% empty %}
+<div class="empty-section" id="no-comments">Sin comentarios registrados</div>
+{% endfor %}
+
+<form hx-post="{% url 'patient_comment_add' patient.id %}"
+      hx-target="#comments-container"
+      hx-swap="innerHTML"
+      hx-on::after-request="this.reset()">
+  {% csrf_token %}
+  <div class="mb-2">
+    {{ form.comment }}
+  </div>
+  <button type="submit" class="btn btn-contigo btn-sm">
+    <i class="bi bi-plus-circle me-1"></i>Agregar comentario
+  </button>
+</form>

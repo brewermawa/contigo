@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ companion.user.get_full_name|default:companion.user.username }} — Contigo{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'core/css/detail.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/companion_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between">
+  <div>
+    <h1>Detalle del acompañante</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'companion_list' %}">Acompañantes</a></li>
+        <li class="breadcrumb-item active">
+          {{ companion.user.get_full_name|default:companion.user.username }}
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <a href="#" class="btn btn-outline-contigo">
+    <i class="bi bi-pencil me-1"></i>Editar
+  </a>
+</div>
+
+<div class="row g-4">
+  <div class="col-12 col-lg-6">
+
+    <!-- Datos generales -->
+    <div class="detail-card">
+      <div class="detail-card-header">Datos generales</div>
+      <div class="detail-card-body">
+        <div class="companion-header">
+          {% if companion.picture %}
+            <img src="{{ companion.picture.url }}" class="companion-photo"
+                 alt="{{ companion.user.first_name }}">
+          {% else %}
+            <div class="companion-photo-placeholder">
+              {{ companion.user.first_name|first|upper }}{{ companion.user.last_name|first|upper }}
+            </div>
+          {% endif %}
+          <div>
+            <p class="companion-full-name">
+              {{ companion.user.get_full_name|default:companion.user.username }}
+            </p>
+            {% if companion.user.is_active %}
+              <span class="status-pill active">Activo</span>
+            {% else %}
+              <span class="status-pill inactive">Inactivo</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Teléfono</span>
+          <span class="detail-value">{{ companion.formatted_phone }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Usuario</span>
+          <span class="detail-value">{{ companion.user.username }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Correo</span>
+          <span class="detail-value">
+            {% if companion.user.email %}{{ companion.user.email }}{% else %}—{% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horario semanal -->
+    <div class="detail-card">
+      <div class="detail-card-header">Horario semanal</div>
+      <div class="detail-card-body">
+        {% for day in week %}
+        <div class="detail-row">
+          <span class="detail-label">{{ day.name }}</span>
+          {% if day.schedule %}
+            <span class="detail-value">
+              {{ day.schedule.start_time|time:"H:i" }} – {{ day.schedule.end_time|time:"H:i" }}
+            </span>
+          {% else %}
+            <span class="day-off">No trabaja</span>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 col-lg-6">
+
+    <!-- Próximas visitas -->
+    <div class="detail-card">
+      <div class="detail-card-header">Próximas visitas</div>
+      <div class="detail-card-body">
+        {% for visit in upcoming_visits %}
+          <div class="visit-item">
+            <div>
+              <div class="visit-item-patient">
+                <a href="{% url 'patient_detail' visit.patient.pk %}">
+                  {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                </a>
+              </div>
+              <div class="visit-item-when">
+                {{ visit.date|date:"d/m/Y" }} · {{ visit.start_time|time:"H:i" }} – {{ visit.end_time|time:"H:i" }}
+              </div>
+            </div>
+            <span class="visit-status badge-{{ visit.status }}">{{ visit.get_status_display }}</span>
+          </div>
+        {% empty %}
+          <div class="empty-section">Sin visitas próximas</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Pacientes preferentes -->
+    <div class="detail-card">
+      <div class="detail-card-header">Pacientes que lo prefieren</div>
+      <div class="detail-card-body">
+        {% for patient in preferred_patients %}
+          <div class="detail-row">
+            <a href="{% url 'patient_detail' patient.pk %}" class="preferred-link">
+              {{ patient.first_name }} {{ patient.last_name }}
+            </a>
+          </div>
+        {% empty %}
+          <div class="empty-section">Ningún paciente lo tiene como preferido</div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

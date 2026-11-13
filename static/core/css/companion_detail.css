@@ -1,0 +1,104 @@
+.companion-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.companion-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8e8e8;
+  flex-shrink: 0;
+}
+
+.companion-photo-placeholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--contigo-green-light);
+  color: var(--contigo-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.companion-full-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 6px;
+}
+
+.status-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.status-pill.active {
+  background: #E1F5EE;
+  color: #0F6E56;
+}
+
+.status-pill.inactive {
+  background: #f0f0f0;
+  color: #888;
+}
+
+.day-off {
+  color: #bbb;
+}
+
+/* ── Upcoming visits ── */
+.visit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.visit-item:last-child {
+  border-bottom: none;
+}
+
+.visit-item-patient {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.visit-item-patient a,
+.preferred-link {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.visit-item-patient a:hover,
+.preferred-link:hover {
+  color: var(--contigo-green);
+  text-decoration: underline;
+}
+
+.visit-item-when {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.visit-status {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}

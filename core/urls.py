@@ -19,4 +19,5 @@ urlpatterns = [
     path('pacientes/<int:pk>/comentario/', views.patient_comment_add, name='patient_comment_add'),
     path('pacientes/<int:pk>/activo/', views.patient_toggle_active, name='patient_toggle_active'),
     path('acompanantes/', views.companion_list, name='companion_list'),
+    path('acompanantes/<int:pk>/', views.companion_detail, name='companion_detail'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

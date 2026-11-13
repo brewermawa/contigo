@@ -14,7 +14,7 @@ from .forms import (
     PatientCommentForm,
     PatientForm,
 )
-from .models import Address, Companion, Patient, Visit
+from .models import Address, Companion, Patient, Visit, CompanionSchedule
 
 
 @login_required
@@ -191,3 +191,29 @@ def companion_list(request):
     if request.headers.get('HX-Request'):
         return render(request, 'core/companion_list_partial.html', context)
     return render(request, 'core/companion_list.html', context)
+
+
+@login_required
+def companion_detail(request, pk):
+    companion = get_object_or_404(
+        Companion.objects.select_related('user').prefetch_related('schedules'),
+        pk=pk
+    )
+
+    schedule_by_day = {s.weekday: s for s in companion.schedules.all()}
+    week = [
+        {'name': label, 'schedule': schedule_by_day.get(value)}
+        for value, label in CompanionSchedule.Weekday.choices
+    ]
+
+    upcoming_visits = companion.visits.filter(
+        date__gte=timezone.localdate(),
+        status__in=[Visit.Status.PENDING, Visit.Status.SCHEDULED],
+    ).select_related('patient').order_by('date', 'start_time')[:5]
+
+    return render(request, 'core/companion_detail.html', {
+        'companion': companion,
+        'week': week,
+        'upcoming_visits': upcoming_visits,
+        'preferred_patients': companion.preferred_patients.filter(active=True),
+    })

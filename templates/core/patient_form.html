@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if patient %}Editar paciente{% else %}Nuevo paciente{% endif %} — Contigo{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'core/css/patient_form.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <h1>{% if patient %}Editar paciente{% else %}Nuevo paciente{% endif %}</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'patient_list' %}">Pacientes</a></li>
+      {% if patient %}
+      <li class="breadcrumb-item"><a href="{% url 'patient_detail' patient.pk %}">{{ patient.first_name }} {{ patient.last_name }}</a></li>
+      <li class="breadcrumb-item active">Editar</li>
+      {% else %}
+      <li class="breadcrumb-item active">Nuevo</li>
+      {% endif %}
+    </ol>
+  </nav>
+</div>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+
+  {% if form.non_field_errors or address_form.non_field_errors %}
+  <div class="form-error-box">
+    {{ form.non_field_errors }}{{ address_form.non_field_errors }}
+  </div>
+  {% endif %}
+
+  <!-- Datos generales -->
+  <div class="form-card">
+    <div class="form-card-header">Datos generales</div>
+    <div class="form-card-body">
+      <div class="row g-3">
+        {% for field in form %}
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Dirección -->
+  <div class="form-card">
+    <div class="form-card-header">Dirección</div>
+    <div class="form-card-body">
+      <div class="row g-3">
+        {% for field in address_form %}
+        <div class="col-12 col-md-{% if field.name == 'street' or field.name == 'neighborhood' %}6{% else %}3{% endif %}">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Familiares -->
+  <div class="form-card">
+    <div class="form-card-header">Familiares</div>
+    <div class="form-card-body">
+      {% include 'core/_formset_block.html' with fs=family_fs col_size="4" %}
+      <div class="formset-hint">Al menos un familiar es obligatorio: es quien recibe el reporte de cada visita.</div>
+    </div>
+  </div>
+
+  <!-- Enfermedades -->
+  <div class="form-card">
+    <div class="form-card-header">Enfermedades</div>
+    <div class="form-card-body">
+      {% include 'core/_formset_block.html' with fs=disease_fs col_size="6" %}
+    </div>
+  </div>
+
+  <!-- Medicamentos -->
+  <div class="form-card">
+    <div class="form-card-header">Medicamentos</div>
+    <div class="form-card-body">
+      {% include 'core/_formset_block.html' with fs=medication_fs col_size="4" %}
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <a href="{% if patient %}{% url 'patient_detail' patient.pk %}{% else %}{% url 'patient_list' %}{% endif %}"
+       class="btn btn-outline-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-contigo">
+      <i class="bi bi-check-lg me-1"></i>Guardar paciente
+    </button>
+  </div>
+</form>
+
+{% endblock %}

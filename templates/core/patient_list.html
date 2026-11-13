@@ -4,14 +4,14 @@
 {% block title %}Pacientes — Contigo{% endblock %}
 
 {% block extra_css %}
-<link href="{% static 'core/css/patient_list.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/list.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
 <div class="page-header d-flex align-items-center justify-content-between">
   <h1>Pacientes</h1>
-  <a href="#" class="btn btn-contigo">
+  <a href="{% url 'patient_create' %}" class="btn btn-contigo">
     <i class="bi bi-person-plus me-1"></i>Nuevo paciente
   </a>
 </div>

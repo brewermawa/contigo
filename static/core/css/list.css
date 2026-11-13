@@ -66,8 +66,15 @@
 }
 
 .patient-name {
+  display: inline-block;
   font-weight: 500;
   color: #1a1a1a;
+  text-decoration: none;
+}
+
+.patient-name:hover {
+  color: var(--contigo-green);
+  text-decoration: underline;
 }
 
 .btn-table-action {

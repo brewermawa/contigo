@@ -1,0 +1,99 @@
+.form-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.form-card-header {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0.75rem 1.25rem;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #888;
+}
+
+.form-card-body {
+  padding: 1.25rem;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  padding: 9px 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--contigo-green);
+  box-shadow: 0 0 0 3px rgba(14, 107, 91, 0.1);
+}
+
+.field-error {
+  font-size: 12px;
+  color: #A32D2D;
+  margin-top: 4px;
+}
+
+.form-error-box {
+  background: #FCEBEB;
+  border-left: 3px solid #E24B4A;
+  border-radius: 0 8px 8px 0;
+  color: #A32D2D;
+  font-size: 13px;
+  padding: 10px 14px;
+  margin-bottom: 1rem;
+}
+
+.form-error-box ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+/* ── Formset rows ── */
+.formset-row {
+  padding: 1rem 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.formset-row:first-of-type {
+  padding-top: 0;
+}
+
+.formset-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.delete-label {
+  font-size: 12px;
+  color: #A32D2D;
+  cursor: pointer;
+}
+
+.formset-hint {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 0.75rem;
+}
+
+/* ── Actions bar ── */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding-bottom: 2rem;
+}

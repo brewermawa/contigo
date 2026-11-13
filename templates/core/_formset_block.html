@@ -1,0 +1,38 @@
+{{ fs.management_form }}
+
+{% if fs.non_form_errors %}
+<div class="form-error-box">{{ fs.non_form_errors }}</div>
+{% endif %}
+
+{% for f in fs %}
+<div class="formset-row">
+  {% for hidden in f.hidden_fields %}{{ hidden }}{% endfor %}
+
+  {% if f.non_field_errors %}
+  <div class="form-error-box">{{ f.non_field_errors }}</div>
+  {% endif %}
+
+  <div class="row g-3">
+    {% for field in f.visible_fields %}
+      {% if field.name == 'DELETE' %}
+        <div class="col-12">
+          <div class="form-check">
+            {{ field }}
+            <label class="form-check-label delete-label" for="{{ field.id_for_label }}">
+              <i class="bi bi-trash me-1"></i>Eliminar este registro
+            </label>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-12 col-md-{{ col_size|default:'6' }}">
+          <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}
+            <div class="field-error">{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}

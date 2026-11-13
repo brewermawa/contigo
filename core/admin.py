@@ -61,7 +61,8 @@ class PatientCommentInline(admin.TabularInline):
 
 
 class PatientAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'phone', 'email']
+    list_display = ['first_name', 'last_name', 'phone', 'email', 'active']
+    list_filter = ['active']
     search_fields = ['first_name', 'last_name', 'email']
     inlines = [AddressInline, DiseaseInline, MedicationInline, FamilyInline, PatientCommentInline]
 

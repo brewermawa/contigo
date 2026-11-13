@@ -1,0 +1,42 @@
+{% for companion in companions %}
+<tr>
+  <td>
+    <div class="d-flex align-items-center gap-3">
+      {% if companion.picture %}
+        <img src="{{ companion.picture.url }}" class="companion-avatar" alt="{{ companion.user.first_name }}">
+      {% else %}
+        <div class="companion-avatar-placeholder">
+          {{ companion.user.first_name|first|upper }}{{ companion.user.last_name|first|upper }}
+        </div>
+      {% endif %}
+      <a href="#" class="companion-name">{{ companion.user.get_full_name }}</a>
+    </div>
+  </td>
+  <td>{{ companion.formatted_phone }}</td>
+  <td>{{ companion.user.username }}</td>
+  <td>
+    {% if companion.user.is_active %}
+      <span class="status-pill active">Activo</span>
+    {% else %}
+      <span class="status-pill inactive">Inactivo</span>
+    {% endif %}
+  </td>
+  <td>
+    <div class="d-flex gap-2">
+      <a href="#" class="btn-table-action" title="Ver">
+        <i class="bi bi-eye"></i>
+      </a>
+      <a href="#" class="btn-table-action" title="Editar">
+        <i class="bi bi-pencil"></i>
+      </a>
+    </div>
+  </td>
+</tr>
+{% empty %}
+<tr>
+  <td colspan="5" class="text-center py-4 text-muted" style="font-size:13px;">
+    <i class="bi bi-people fs-4 d-block mb-2"></i>
+    No se encontraron acompañantes
+  </td>
+</tr>
+{% endfor %}

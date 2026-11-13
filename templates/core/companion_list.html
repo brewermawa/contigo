@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Acompañantes — Contigo{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'core/css/list.css' %}" rel="stylesheet">
+<link href="{% static 'core/css/companion_list.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header d-flex align-items-center justify-content-between">
+  <h1>Acompañantes</h1>
+  <a href="#" class="btn btn-contigo">
+    <i class="bi bi-heart-plus me-1"></i>Nuevo acompañante
+  </a>
+</div>
+
+<div class="table-card">
+  <!-- Search bar -->
+  <div class="p-3 border-bottom d-flex align-items-center gap-3">
+    <div class="search-box">
+      <i class="bi bi-search"></i>
+      <input
+        type="text"
+        name="q"
+        value="{{ query }}"
+        placeholder="Buscar acompañante..."
+        hx-get="{% url 'companion_list' %}"
+        hx-trigger="keyup changed delay:400ms"
+        hx-target="#companion-tbody"
+        hx-indicator="#search-spinner"
+        autocomplete="off"
+      >
+    </div>
+    <div id="search-spinner" class="htmx-indicator">
+      <div class="spinner-border spinner-border-sm text-secondary" role="status"></div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Usuario</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="companion-tbody">
+        {% include 'core/companion_list_partial.html' %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.12/dist/htmx.min.js"></script>
+{% endblock %}

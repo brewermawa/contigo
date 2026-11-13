@@ -1,7 +1,9 @@
 {% for patient in patients %}
 <tr>
   <td>
-    <div class="patient-name">{{ patient.first_name }} {{ patient.last_name }}</div>
+    <a href="{% url 'patient_detail' patient.pk %}" class="patient-name">
+      {{ patient.first_name }} {{ patient.last_name }}
+    </a>
   </td>
   <td>{{ patient.formatted_phone }}</td>
   <td>{{ patient.email }}</td>
@@ -14,10 +16,10 @@
   </td>
   <td>
     <div class="d-flex gap-2">
-      <a href="{% url 'patient_detail' patient.id %}" class="btn-table-action">
+      <a href="{% url 'patient_detail' patient.pk %}" class="btn-table-action" title="Ver">
         <i class="bi bi-eye"></i>
       </a>
-      <a href="" class="btn-table-action">
+      <a href="{% url 'patient_edit' patient.pk %}" class="btn-table-action" title="Editar">
         <i class="bi bi-pencil"></i>
       </a>
     </div>

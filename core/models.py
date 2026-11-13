@@ -40,6 +40,11 @@ class Patient(models.Model):
     email = models.EmailField(verbose_name="Correo electrónico")
     birth_date = models.DateField(verbose_name="Fecha de nacimiento")
     picture = models.ImageField(upload_to='pacientes/', verbose_name="Foto")
+    preferred_companion = models.ForeignKey(
+        Companion, on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="preferred_patients", verbose_name="Acompañante preferido"
+    )
+    active = models.BooleanField(default=True, verbose_name="Activo")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

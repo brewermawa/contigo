@@ -1,0 +1,51 @@
+.companion-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e8e8e8;
+  flex-shrink: 0;
+}
+
+.companion-avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--contigo-green-light);
+  color: var(--contigo-green);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.companion-name {
+  display: inline-block;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.companion-name:hover {
+  color: var(--contigo-green);
+  text-decoration: underline;
+}
+
+.status-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.status-pill.active {
+  background: #E1F5EE;
+  color: #0F6E56;
+}
+
+.status-pill.inactive {
+  background: #f0f0f0;
+  color: #888;
+}
